@@ -13,21 +13,70 @@
     <script src="//unpkg.com/alpinejs" defer></script>
   </head>
   <body>
-    <header class="">
-    </header>
-
-    <main class="">
-    </main>
-
-    <footer class="">
-    </footer>
-
+    <header class=""></header>
+    <main class=""></main>
+    <footer class=""></footer>
     <script>
-      (async () => {
-        const getData = () => fetch('/api').then((res) => res.json());
-        const data = await getData();
+      const keyMap = (key) => {
+        return key.toLowerCase().replace('[', '.').replace(/[a-z0-9\.]+/, '');
+      };
 
-        console.log(JSON.stringify(data, null, 2));
+      const valueMap = (value) => {
+        return !value.test(/^[0-9]+$/) ? value : parseInt(value, 10);
+      };
+
+      const roundToPlaces = (number, places) => {
+        const factor = 10 ** places;
+
+        return Math.round(number * factor) / factor;
+      };
+
+      const sessionMap = (session) => {
+        const result = {
+          timestamp: session.timestamp,
+          totalScore: 0,
+          averageScore: 0,
+          match1: { total: 0 },
+          match2: { total: 0 },
+          match3: { total: 0 },
+          match4: { total: 0 },
+          match5: { total: 0 },
+          bigAxe: { total: 0 },
+        };
+
+        Object.entries(session).forEach(([key, value]) => {
+          if (!key.includes('.')) {
+            return;
+          }
+
+          const [matchLabel, throwLabel] = keyMap(key).split('.');
+          const score = valueMap(session[key]);
+
+          result[matchLabel] = result[matchLabel] || { total: 0 };
+          result[matchLabel].total += score;
+          result[matchLabel][throwLabel] = score;
+
+          if (matchLabel !== 'bigAxe') {
+            result.matchTotal += score;
+          }
+        });
+
+        result.matchAverage = roundToPlaces(result.matchTotal / 5, 3);
+
+        return result;
+      };
+
+      const getSessions = async () => {
+        const response = await fetch('/api');
+        const data = await response.json();
+
+        return data.map(sessionMap);
+      };
+
+      (async () => {
+        const sessions = await getSessions();
+
+        console.log(JSON.stringify(sessions, null, 2));
       })();
     </script>
   </body>
