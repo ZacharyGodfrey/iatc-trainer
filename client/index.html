@@ -24,7 +24,7 @@
 
     <script>
       (async () => {
-        const getData = () => fetch('/api').then(({ json }) => json());
+        const getData = () => fetch('/api').then((res) => res.json());
         const data = await getData();
 
         console.log(JSON.stringify(data, null, 2));
