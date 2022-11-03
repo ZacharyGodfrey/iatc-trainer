@@ -22,7 +22,7 @@
       };
 
       const valueMap = (value) => {
-        const isNumeric = /^\-?\d+\.?\d+$/.test(value);
+        const isNumeric = /^\d+$/.test(value);
 
         return isNumeric ? parseInt(value, 10) : value;
       };
