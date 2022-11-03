@@ -22,8 +22,9 @@
       };
 
       const valueMap = (value) => {
-        console.log(typeof value);
-        return !value.test(/^[0-9]+$/) ? value : parseInt(value, 10);
+        const isNumeric = /^\-?\d+\.?\d+$/.test(value);
+
+        return isNumeric ? parseInt(value, 10) : value;
       };
 
       const roundToPlaces = (number, places) => {
