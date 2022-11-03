@@ -22,7 +22,6 @@
       };
 
       const valueMap = (value) => {
-        console.log(value);
         return !value.test(/^[0-9]+$/) ? value : parseInt(value, 10);
       };
 
@@ -46,6 +45,7 @@
         };
 
         Object.entries(session).forEach(([key, value]) => {
+          console.log([key, value]);
           if (key === 'Timestamp') {
             return;
           }
