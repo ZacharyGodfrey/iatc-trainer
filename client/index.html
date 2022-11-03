@@ -50,7 +50,7 @@
           }
 
           const [matchLabel, throwLabel] = keyMap(key).split('.');
-          const score = valueMap(session[key]);
+          const score = valueMap(value);
 
           result[matchLabel] = result[matchLabel] || { total: 0 };
           result[matchLabel].total += score;
