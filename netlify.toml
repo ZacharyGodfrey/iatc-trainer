@@ -2,10 +2,10 @@
 # https://docs.netlify.com/configure-builds/file-based-configuration
 
 [build]
-  publish = "src/content"
+  publish = "client"
 
 [functions]
-  directory = "src/api"
+  directory = "api"
 
 [[redirects]]
   from = "/api/*"
