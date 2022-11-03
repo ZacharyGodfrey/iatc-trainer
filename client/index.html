@@ -22,6 +22,7 @@
       };
 
       const valueMap = (value) => {
+        console.log(value);
         return !value.test(/^[0-9]+$/) ? value : parseInt(value, 10);
       };
 
