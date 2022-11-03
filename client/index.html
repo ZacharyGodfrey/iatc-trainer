@@ -34,7 +34,7 @@
 
       const sessionMap = (session) => {
         const result = {
-          timestamp: session.timestamp,
+          timestamp: session.Timestamp,
           totalScore: 0,
           averageScore: 0,
           match1: { total: 0 },
@@ -46,7 +46,7 @@
         };
 
         Object.entries(session).forEach(([key, value]) => {
-          if (key === 'timestamp') {
+          if (key === 'Timestamp') {
             return;
           }
 
