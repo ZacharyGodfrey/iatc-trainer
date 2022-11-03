@@ -18,7 +18,8 @@
     <footer class=""></footer>
     <script>
       const keyMap = (key) => {
-        return key.toLowerCase().replace('[', '.').replace(/[a-z0-9\.]+/, '');
+        const regex = /[a-z0-9\.]/;
+        return key.toLowerCase().replace('[', '.').split('').filter((x) => regex.test(x)).join('');
       };
 
       const valueMap = (value) => {
