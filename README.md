@@ -30,12 +30,12 @@ You can view the app [here][app-page].
 
 ### Environment Variables
 
-The following environment variables must be configured when working locally and when deploying to the server.
+The following environment variables must be configured when working locally and when deploying to the server:
 
 ```
-GOOGLE_SHEETS_API_KEY
 GOOGLE_SHEETS_DOC_ID
 GOOGLE_SHEETS_SHEET_NAME
+GOOGLE_SHEETS_API_KEY
 ```
 
 ---
