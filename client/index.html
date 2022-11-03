@@ -45,7 +45,7 @@
         };
 
         Object.entries(session).forEach(([key, value]) => {
-          if (!key.includes('.')) {
+          if (key === 'timestamp') {
             return;
           }
 
@@ -61,7 +61,7 @@
           }
         });
 
-        result.matchAverage = roundToPlaces(result.matchTotal / 5, 3);
+        result.averageScore = roundToPlaces(result.totalScore / 5, 3);
 
         return result;
       };
