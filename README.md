@@ -1,6 +1,6 @@
 # IATC Trainer
 
-An app for recording practice sessions for the IATC Round 1 competition format
+An app for recording practice sessions for the IATC Round 1 [competition format][iatf-round1]
 
 ---
 
@@ -31,7 +31,7 @@ GOOGLE_SHEETS_SHEET_NAME
 ```
 
 ---
-
+[iatf-round1]: https://internationalaxethrowingfederation.com/round-1-of-the-iatc
 [google-form]: https://tbd.com
 [google-sheet]: https://tbd.com
 [app-page]: https://tbd.com
