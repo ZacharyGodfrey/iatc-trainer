@@ -19,6 +19,7 @@
     <script>
       const keyMap = (key) => {
         const regex = /[a-z0-9\.]/;
+
         return key.toLowerCase().replace('[', '.').split('').filter((x) => regex.test(x)).join('');
       };
 
@@ -44,11 +45,10 @@
           match3: { total: 0 },
           match4: { total: 0 },
           match5: { total: 0 },
-          bigAxe: { total: 0 },
+          bigaxe: { total: 0 },
         };
 
         Object.entries(session).forEach(([key, value]) => {
-          console.log([key, value]);
           if (key === 'Timestamp') {
             return;
           }
@@ -60,7 +60,7 @@
           result[matchLabel].total += score;
           result[matchLabel][throwLabel] = score;
 
-          if (matchLabel !== 'bigAxe') {
+          if (matchLabel !== 'bigaxe') {
             result.matchTotal += score;
           }
         });
