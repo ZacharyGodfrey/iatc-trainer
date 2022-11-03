@@ -20,6 +20,12 @@ You can view the app [here][app-page].
 
 ## Development Notes
 
+### Tech Stack
+
+- CSS: [TailwindCSS](https://tailwindcss.com)
+- Client-Side JS: [AlpineJS](https://alpinejs.dev)
+- Hosting: [Netlify](https://www.netlify.com)
+
 ### Environment Variables
 
 The following environment variables must be configured when working locally and when deploying to the server.
@@ -31,6 +37,7 @@ GOOGLE_SHEETS_SHEET_NAME
 ```
 
 ---
+
 [iatf-round1]: https://internationalaxethrowingfederation.com/round-1-of-the-iatc
 [google-form]: https://tbd.com
 [google-sheet]: https://tbd.com

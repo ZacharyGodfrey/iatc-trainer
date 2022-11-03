@@ -1,0 +1,18 @@
+# Documentation:
+# https://docs.netlify.com/configure-builds/file-based-configuration
+
+[build]
+  publish = "src/content"
+
+[functions]
+  directory = "src/api"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/index"
+  status = 301
+  force = true
+
+[dev]
+  port = 8080
+  autoLaunch = true
