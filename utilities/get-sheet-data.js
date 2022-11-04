@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const fetch = (docId, sheetName, apiKey) => {
+const fetch = async (docId, sheetName, apiKey) => {
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${docId}/values/${sheetName}?key=${apiKey}`;
   const { data } = await axios.get(url);
 
