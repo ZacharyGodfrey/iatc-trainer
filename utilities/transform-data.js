@@ -1,3 +1,5 @@
+const dayjs = require('dayjs');
+
 const sum = (values) => {
   return values.reduce((total, value) => total + value, 0);
 };
@@ -48,7 +50,7 @@ module.exports = (sheetDataObjects) => {
   return sheetDataObjects.map((sheetData) => {
     const denormalized = denormalizeSheetData(sheetData);
     const result = {
-      timestamp: denormalized.timestamp,
+      timestamp: dayjs(denormalized.timestamp, 'M/D/YYYY HH:mm:ss').toISOString(),
       totalMatchScore: 0,
       averageMatchScore: 0,
       match1: {
