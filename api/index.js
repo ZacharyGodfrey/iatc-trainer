@@ -1,4 +1,5 @@
 const getSheetData = require('../utilities/get-sheet-data');
+const transformData = require('../utilities/transform-data');
 const createLambdaHandler = require('../utilities/create-lambda-handler');
 
 module.exports.handler = createLambdaHandler(async () => {
@@ -9,6 +10,7 @@ module.exports.handler = createLambdaHandler(async () => {
   } = process.env;
 
   const data = await getSheetData(docId, sheetName, apiKey);
+  const result = transformData(data);
 
-  return data;
+  return result;
 });

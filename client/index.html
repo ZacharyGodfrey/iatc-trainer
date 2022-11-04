@@ -17,68 +17,8 @@
     <main class=""></main>
     <footer class=""></footer>
     <script>
-      const keyMap = (key) => {
-        const regex = /[a-z0-9\.]/;
-
-        return key.toLowerCase().replace('[', '.').split('').filter((x) => regex.test(x)).join('');
-      };
-
-      const valueMap = (value) => {
-        const isNumeric = /^\d+$/.test(value);
-
-        return isNumeric ? parseInt(value, 10) : value;
-      };
-
-      const roundToPlaces = (number, places) => {
-        const factor = 10 ** places;
-
-        return Math.round(number * factor) / factor;
-      };
-
-      const sessionMap = (session) => {
-        const result = {
-          timestamp: session.Timestamp,
-          totalScore: 0,
-          averageScore: 0,
-          match1: { total: 0 },
-          match2: { total: 0 },
-          match3: { total: 0 },
-          match4: { total: 0 },
-          match5: { total: 0 },
-          bigaxe: { total: 0 },
-        };
-
-        Object.entries(session).forEach(([key, value]) => {
-          if (key === 'Timestamp') {
-            return;
-          }
-
-          const [matchLabel, throwLabel] = keyMap(key).split('.');
-          const score = valueMap(value);
-
-          result[matchLabel] = result[matchLabel] || { total: 0 };
-          result[matchLabel].total += score;
-          result[matchLabel][throwLabel] = score;
-
-          if (matchLabel !== 'bigaxe') {
-            result.totalScore += score;
-          }
-        });
-
-        result.averageScore = roundToPlaces(result.totalScore / 5, 3);
-
-        return result;
-      };
-
-      const getSessions = async () => {
-        const response = await fetch('/api');
-        const data = await response.json();
-
-        return data.map(sessionMap);
-      };
-
       (async () => {
-        const sessions = await getSessions();
+        const sessions = await fetch('/api').then(res => res.json());
 
         console.log(JSON.stringify(sessions, null, 2));
       })();
