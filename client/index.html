@@ -12,10 +12,15 @@
     </style>
     <script src="//unpkg.com/alpinejs" defer></script>
   </head>
-  <body>
+  <body class="text-base font-mono text-slate-600 g-gray-100">
     <header class=""></header>
-    <main class=""></main>
+
+    <main class="container mx-auto">
+      <section class="bg-white p-4 rounded"></section>
+    </main>
+
     <footer class=""></footer>
+
     <script>
       (async () => {
         const sessions = await fetch('/api').then(res => res.json());
