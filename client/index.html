@@ -6,6 +6,9 @@
     <meta name="description" content="An app for recording practice sessions for the IATC Round 1 competition format">
     <title>IATC Trainer</title>
     <link rel="shortcut icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQfkBwcUIzDtqVv8AAAA7klEQVRIx+2UPRKCMBCFv+gBqOAS/BTcwhk8gBVclKSAGTquYG9JZ+HEgswoEEK0oWGrRzbvZUneLhyxf5wXKxkX7jwtewNuvHi4BRMUA5U1VzGgSLboGkVqzaYmm7jp0nFG4pLYpjsl/OirEv50q8SULoiIEE48kcipJ/QrDQ0FYoFbg0cJiaYmhx5NR2yqiWjQaBpCwgluDY7MzpgOTX/y9qyefQvEuDr/heKrbDv+3EJNvrxV/0uU83dQPz2jtDlBeRtJrnlReVlZurpBbTaT3OrHtXbOfAw/DpTy34Eyjo2SwJoJqFZqO2LneAPBQX6E4ZXh/QAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMC0wNy0wN1QyMDozNTo0MSswMDowMAfDeWoAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjAtMDctMDdUMjA6MzU6NDErMDA6MDB2nsHWAAAAAElFTkSuQmCC">
+    <style>
+      [x-cloak] { display: none !important; }
+    </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
   </head>
@@ -16,9 +19,38 @@
       </section>
     </header>
 
-    <main class="flex-1 max-w-4xl mx-auto p-4">
-      <section class="bg-white p-4 rounded">
-        <p>This is some content on the page.</p>
+    <main class="flex-1 max-w-4xl mx-auto p-4" x-data="DATA">
+      <section class="bg-white p-4 rounded" x-cloak>
+        <p x-show="sessions.length === 0">There is no data to display.</p>
+
+        <table x-show="sessions.length > 0">
+          <thead>
+            <th>Session</th>
+            <th>Total Match Score</th>
+            <th>Average Match Score</th>
+            <th>Big Axe Total Score</th>
+            <th>Match 1 Score</th>
+            <th>Match 2 Score</th>
+            <th>Match 3 Score</th>
+            <th>Match 4 Score</th>
+            <th>Match 5 Score</th>
+          </thead>
+          <tbody>
+            <template x-for="x in sessions" :key="x.timestamp">
+              <tr>
+                <td x-text="x.timestamp"></td>
+                <td x-text="x.totalMatchScore"></td>
+                <td x-text="x.averageMatchScore"></td>
+                <td x-text="x.bigAxe.total"></td>
+                <td x-text="x.match1.total"></td>
+                <td x-text="x.match2.total"></td>
+                <td x-text="x.match3.total"></td>
+                <td x-text="x.match4.total"></td>
+                <td x-text="x.match5.total"></td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
       </section>
     </main>
 
@@ -29,10 +61,12 @@
     </footer>
 
     <script>
-      (async () => {
-        const sessions = await fetch('/api').then(res => res.json());
+      const DATA = { sessions: [] };
 
-        console.log(JSON.stringify(sessions, null, 2));
+      (async () => {
+        DATA.sessions = await fetch('/api').then(res => res.json());
+
+        console.log(DATA);
       })();
     </script>
   </body>
