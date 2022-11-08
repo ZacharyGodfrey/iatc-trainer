@@ -27,6 +27,8 @@
       </section>
 
       <section class="bg-white mb-4 p-4 rounded" x-cloak>
+        <h1 x-text="sessions.length"></h1>
+
         <p x-show="sessions.length === 0">No practice sessions have been submitted yet.</p>
 
         <table x-show="sessions.length > 0">
