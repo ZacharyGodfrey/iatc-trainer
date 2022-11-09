@@ -42,14 +42,14 @@
             </tr>
           </thead>
           <tbody>
-            <template x-for="s in sessions" :key="s.id">
+            <template x-for="(s, i) in sessions" :key="s.id">
               <tr>
                 <td class="p-2 border border-neutral-700 text-center" x-text="s.timestamp"></td>
                 <td class="p-2 border border-neutral-700 text-center" x-text="s.totalMatchScore"></td>
                 <td class="p-2 border border-neutral-700 text-center" x-text="s.averageMatchScore"></td>
                 <td class="p-2 border border-neutral-700 text-center" x-text="s.bigAxe.total"></td>
                 <td class="p-2 border border-neutral-700 text-center">
-                  <button class="px-4 py-2 rounded bg-green-500" @click="details = s">View</button>
+                  <button class="px-4 py-2 rounded bg-green-500" @click="details = sessions[i]">View</button>
                 </td>
               </tr>
             </template>
