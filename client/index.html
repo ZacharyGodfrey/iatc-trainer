@@ -58,29 +58,29 @@
       </section>
 
       <template x-if="sessionIndex >= 0">
-        <section class="bg-white mb-4 p-4 rounded-lg" x-data="sessions[sessionIndex]">
-          <h2 class="text-2xl">Session Details: <span x-text="timestamp"></span></h2>
+        <section class="bg-white mb-4 p-4 rounded-lg" x-data="{ details: {} }" x-init="details = sessions[sessionIndex]">
+          <h2 class="text-2xl">Session Details: <span x-text="details.timestamp"></span></h2>
 
           <br>
 
           <p>
             <strong>Total Score:</strong>
-            <span x-text="totalMatchScore"></span>
+            <span x-text="details.totalMatchScore"></span>
           </p>
 
           <p>
             <strong>Average Score:</strong>
-            <span x-text="averageMatchScore"></span>
+            <span x-text="details.averageMatchScore"></span>
           </p>
 
           <p>
             <strong>Big Axe Score:</strong>
-            <span x-text="bigAxe.total"></span>
+            <span x-text="details.bigAxe.total"></span>
           </p>
 
           <br>
 
-          <table class="w-full border-collapse border border-neutral-700">
+          <table class="w-full border-collapse border border-neutral-700" x-data="details">
             <thead>
               <tr>
                 <th class="p-2 border border-neutral-700 font-normal bg-green-500">Match</th>
