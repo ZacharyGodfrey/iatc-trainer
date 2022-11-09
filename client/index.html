@@ -77,6 +77,12 @@
               </template>
             </tbody>
           </table>
+          
+          <br>
+          
+          <div class="text-right">
+            <button class="px-4 py-2 rounded bg-green-500" @click="details = null">Close</button>
+          </div>
         </section>
       </template>
 
@@ -98,14 +104,14 @@
             </tr>
           </thead>
           <tbody>
-            <template x-for="x in sessions" :key="x.id">
+            <template x-for="(x, i) in sessions" :key="x.id">
               <tr>
                 <td class="p-2 border border-neutral-700 text-center" x-text="x.timestamp"></td>
                 <td class="p-2 border border-neutral-700 text-center" x-text="x.totalMatchScore"></td>
                 <td class="p-2 border border-neutral-700 text-center" x-text="x.averageMatchScore"></td>
                 <td class="p-2 border border-neutral-700 text-center" x-text="x.bigAxe.total"></td>
                 <td class="p-2 border border-neutral-700 text-center">
-                  <button class="px-4 py-2 rounded bg-green-500">View</button>
+                  <button class="px-4 py-2 rounded bg-green-500" @click="details = sessions[i]">View</button>
                 </td>
               </tr>
             </template>
