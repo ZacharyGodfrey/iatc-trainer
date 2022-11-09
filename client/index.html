@@ -19,9 +19,55 @@
       </section>
     </header>
 
-    <main class="grow w-full max-w-4xl mx-auto p-4" x-data="{ sessions: [] }" x-init="sessions = await getSessions()">
+    <main class="grow w-full max-w-4xl mx-auto p-4" x-data="{ sessions: [], details: null }" x-init="sessions = await getSessions()">
       <section class="bg-white mb-4 p-4 rounded-lg">
         <p>Training sessions use the <a class="underline text-green-500" target="_blank" href="https://internationalaxethrowingfederation.com/round-1-of-the-iatc">IATC Round 1</a> competition format.</p>
+      </section>
+
+      <section class="bg-white mb-4 p-4 rounded-lg" x-cloak x-show="details !== null">
+        <h2 class="text-2xl">Session Details: <span x-text="details.timestamp"></span></h2>
+        
+        <br>
+        
+        <p>
+          <strong>Total Score</strong>
+          <span x-text="details.totalMatchScore"></span>
+        </p>
+        
+        <p>
+          <strong>Average Score</strong>
+          <span x-text="details.averageMatchScore"></span>
+        </p>
+        
+        <p>
+          <strong>Big Axe Score</strong>
+          <span x-text="details.bigAxe.total"></span>
+        </p>
+        
+        <br>
+
+        <table class="w-full border-collapse border border-neutral-700">
+          <thead>
+            <th class="p-2 border border-neutral-700 font-normal bg-green-500">Session</th>
+            <th class="p-2 border border-neutral-700 font-normal bg-green-500">Total Score</th>
+            <th class="p-2 border border-neutral-700 font-normal bg-green-500">Average Score</th>
+            <th class="p-2 border border-neutral-700 font-normal bg-green-500">Big Axe Total</th>
+            <th class="p-2 border border-neutral-700 font-normal bg-green-500">Details</th>
+          </thead>
+          <tbody>
+            <template x-for="x in sessions" :key="x.id">
+              <tr>
+                <td class="p-2 border border-neutral-800 text-center" x-text="x.timestamp"></td>
+                <td class="p-2 border border-neutral-800 text-center" x-text="x.totalMatchScore"></td>
+                <td class="p-2 border border-neutral-800 text-center" x-text="x.averageMatchScore"></td>
+                <td class="p-2 border border-neutral-800 text-center" x-text="x.bigAxe.total"></td>
+                <td class="p-2 border border-neutral-800 text-center">
+                  <button class="px-4 py-2 rounded bg-green-500">View</button>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
       </section>
 
       <section class="bg-white mb-4 p-4 rounded-lg" x-cloak>
