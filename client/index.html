@@ -92,7 +92,16 @@
               <template x-for="x in matches" :key="x.name">
                 <tr>
                   <td class="p-2 border border-neutral-700 text-center" x-text="x.name"></td>
-                  <td class="p-2 border border-neutral-700 text-center" x-text="x.throw1"></td>
+                  <td class="border border-neutral-700 text-center">
+                    <span :class="{
+                      'p-2': true,
+                      'bg-lime-500': x.throw1 === 7,
+                      'bg-lime-300': x.throw1 === 5,
+                      'bg-yellow-200': x.throw1 === 3,
+                      'bg-red-300': x.throw1 === 1,
+                      'bg-red-400': x.throw1 === 0,
+                    }" x-text="x.throw1"></span>
+                  </td>
                   <td class="p-2 border border-neutral-700 text-center" x-text="x.throw2"></td>
                   <td class="p-2 border border-neutral-700 text-center" x-text="x.throw3"></td>
                   <td class="p-2 border border-neutral-700 text-center" x-text="x.throw4"></td>
