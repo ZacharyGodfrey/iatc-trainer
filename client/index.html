@@ -33,11 +33,11 @@
 
         <table class="w-full border-collapse border border-neutral-700" x-show="sessions.length > 0">
           <thead>
-            <th class="p-2 border border-neutral-700 font-normal bg-green-500">Session</th>
-            <th class="p-2 border border-neutral-700 font-normal bg-green-500">Total Score</th>
-            <th class="p-2 border border-neutral-700 font-normal bg-green-500">Average Score</th>
-            <th class="p-2 border border-neutral-700 font-normal bg-green-500">Big Axe Total</th>
-            <th class="p-2 border border-neutral-700 font-normal bg-green-500">Match Scores</th>
+            <th class="p-2 border border-neutral-700 font-normal text-white bg-green-500">Session</th>
+            <th class="p-2 border border-neutral-700 font-normal text-white bg-green-500">Total Score</th>
+            <th class="p-2 border border-neutral-700 font-normal text-white bg-green-500">Average Score</th>
+            <th class="p-2 border border-neutral-700 font-normal text-white bg-green-500">Big Axe Total</th>
+            <th class="p-2 border border-neutral-700 font-normal text-white bg-green-500">Match Scores</th>
           </thead>
           <tbody>
             <template x-for="x in sessions" :key="x.id">
@@ -47,6 +47,7 @@
                 <td class="p-2 border border-neutral-800 text-center" x-text="x.averageMatchScore"></td>
                 <td class="p-2 border border-neutral-800 text-center" x-text="x.bigAxe.total"></td>
                 <td class="p-2 border border-neutral-800">
+                  <button class="px-4 py-2 rounded text-white bg-green-500">Details</button>
                   <ol class="list-inside list-decimal">
                     <li x-text="x.match1.total"></li>
                     <li x-text="x.match2.total"></li>
