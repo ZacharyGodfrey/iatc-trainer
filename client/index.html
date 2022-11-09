@@ -31,11 +31,11 @@
 
         <table class="w-full border-collapse border border-neutral-800" x-show="sessions.length > 0">
           <thead>
-            <th class="p-2 border border-neutral-800">Session</th>
-            <th class="p-2 border border-neutral-800">Match Total</th>
-            <th class="p-2 border border-neutral-800">Match Average</th>
-            <th class="p-2 border border-neutral-800">Big Axe Total</th>
-            <th class="p-2 border border-neutral-800">Match Scores</th>
+            <th class="p-2 border border-neutral-800 bg-neutral-200">Session</th>
+            <th class="p-2 border border-neutral-800 bg-neutral-200">Match Total</th>
+            <th class="p-2 border border-neutral-800 bg-neutral-200">Match Average</th>
+            <th class="p-2 border border-neutral-800 bg-neutral-200">Big Axe Total</th>
+            <th class="p-2 border border-neutral-800 bg-neutral-200">Match Scores</th>
           </thead>
           <tbody>
             <template x-for="x in sessions" :key="x.timestamp">

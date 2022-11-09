@@ -50,7 +50,7 @@ module.exports = (sheetDataObjects) => {
   return sheetDataObjects.map((sheetData) => {
     const denormalized = denormalizeSheetData(sheetData);
     const result = {
-      timestamp: dayjs(denormalized.timestamp, 'M/D/YYYY HH:mm:ss').format('YYYY MM DD hh:mma'),
+      timestamp: dayjs(denormalized.timestamp, 'M/D/YYYY HH:mm:ss').format('YYYY MMM DD hh:mma'),
       totalMatchScore: 0,
       averageMatchScore: 0,
       match1: {
