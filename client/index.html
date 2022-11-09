@@ -85,6 +85,7 @@
               <tr>
                 <th class="p-2 border border-neutral-700 font-normal bg-green-500">Match</th>
                 <th class="p-2 border border-neutral-700 font-normal bg-green-500" colspan="15">Throws</th>
+                <th class="p-2 border border-neutral-700 font-normal bg-green-500">Total</th>
               </tr>
             </thead>
             <tbody x-data="{ matches: [details.match1, details.match2, details.match3, details.match4, details.match5, details.bigAxe] }">
@@ -106,6 +107,7 @@
                   <td class="p-2 border border-neutral-700 text-center" x-text="x.throw13"></td>
                   <td class="p-2 border border-neutral-700 text-center" x-text="x.throw14"></td>
                   <td class="p-2 border border-neutral-700 text-center" x-text="x.throw15"></td>
+                  <td class="p-2 border border-neutral-700 text-center" x-text="x.total"></td>
                 </tr>
               </template>
             </tbody>
