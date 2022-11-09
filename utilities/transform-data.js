@@ -57,32 +57,39 @@ const byDescending = (items, selector) => {
 module.exports = (sheetDataObjects) => {
   const mapped = sheetDataObjects.map((sheetData) => {
     const denormalized = denormalizeSheetData(sheetData);
+    const date = dayjs(denormalized.timestamp, 'M/D/YYYY HH:mm:ss');
     const result = {
-      id: dayjs(denormalized.timestamp, 'M/D/YYYY HH:mm:ss').toISOString(),
-      timestamp: dayjs(denormalized.timestamp, 'M/D/YYYY HH:mm:ss').format('YYYY MMM DD hh:mma'),
+      id: date.toISOString(),
+      timestamp: date.format('YYYY MMM DD hh:mma'),
       totalMatchScore: 0,
       averageMatchScore: 0,
       match1: {
+        name: 'Match 1',
         total: sum(Object.values(denormalized.match1)),
         ...denormalized.match1
       },
       match2: {
+        name: 'Match 2',
         total: sum(Object.values(denormalized.match2)),
         ...denormalized.match2
       },
       match3: {
+        name: 'Match 3',
         total: sum(Object.values(denormalized.match3)),
         ...denormalized.match3
       },
       match4: {
+        name: 'Match 4',
         total: sum(Object.values(denormalized.match4)),
         ...denormalized.match4
       },
       match5: {
+        name: 'Match 5',
         total: sum(Object.values(denormalized.match5)),
         ...denormalized.match5
       },
       bigAxe: {
+        name: 'Big Axe',
         total: sum(Object.values(denormalized.bigAxe)),
         ...denormalized.bigAxe
       },
