@@ -35,7 +35,7 @@
             <th class="border border-neutral-800">Total Match Score</th>
             <th class="border border-neutral-800">Average Match Score</th>
             <th class="border border-neutral-800">Big Axe Total Score</th>
-            <th class="border border-neutral-800">Match 1 Score</th>
+            <th class="border border-neutral-800">Match Scores</th>
             <th class="border border-neutral-800">Match 2 Score</th>
             <th class="border border-neutral-800">Match 3 Score</th>
             <th class="border border-neutral-800">Match 4 Score</th>
@@ -44,15 +44,19 @@
           <tbody>
             <template x-for="x in sessions" :key="x.timestamp">
               <tr>
-                <td class="border border-neutral-800" x-text="x.timestamp"></td>
-                <td class="border border-neutral-800" x-text="x.totalMatchScore"></td>
-                <td class="border border-neutral-800" x-text="x.averageMatchScore"></td>
-                <td class="border border-neutral-800" x-text="x.bigAxe.total"></td>
-                <td class="border border-neutral-800" x-text="x.match1.total"></td>
-                <td class="border border-neutral-800" x-text="x.match2.total"></td>
-                <td class="border border-neutral-800" x-text="x.match3.total"></td>
-                <td class="border border-neutral-800" x-text="x.match4.total"></td>
-                <td class="border border-neutral-800" x-text="x.match5.total"></td>
+                <td class="border border-neutral-800 text-center" x-text="x.timestamp"></td>
+                <td class="border border-neutral-800 text-center" x-text="x.totalMatchScore"></td>
+                <td class="border border-neutral-800 text-center" x-text="x.averageMatchScore"></td>
+                <td class="border border-neutral-800 text-center" x-text="x.bigAxe.total"></td>
+                <td class="border border-neutral-800 text-center">
+                  <ol class="list-inside list-decimal">
+                    <li x-text="x.match1.total"></li>
+                    <li x-text="x.match2.total"></li>
+                    <li x-text="x.match3.total"></li>
+                    <li x-text="x.match4.total"></li>
+                    <li x-text="x.match5.total"></li>
+                  </ol>
+                </td>
               </tr>
             </template>
           </tbody>
