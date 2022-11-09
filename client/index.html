@@ -21,9 +21,9 @@
 
     <main class="grow w-full max-w-4xl mx-auto p-4" x-data="{ sessions: [] }" x-init="sessions = await getSessions()">
       <section class="bg-white mb-4 p-4 rounded">
-        <p>You can submit a practice session using <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfWmTWE95z_oxA_13GvSSKS8aA8vyD3XHSGV0y52O27bCZkyA/viewform?usp=sf_link">this Google Form</a>.</p>
+        <p>You can submit a practice session using <a class="underline text-green-600" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfWmTWE95z_oxA_13GvSSKS8aA8vyD3XHSGV0y52O27bCZkyA/viewform?usp=sf_link">this Google Form</a>.</p>
 
-        <p>You can view the raw data in <a target="_blank" href="https://docs.google.com/spreadsheets/d/1wZQt0AIFaokmbVYYIVV65dx5Ty5xxE0xvJc-moip-tY/edit?usp=sharing">this Google Spreadsheet</a>.</p>
+        <p>You can view the raw data in <a class="underline text-green-600" target="_blank" href="https://docs.google.com/spreadsheets/d/1wZQt0AIFaokmbVYYIVV65dx5Ty5xxE0xvJc-moip-tY/edit?usp=sharing">this Google Spreadsheet</a>.</p>
       </section>
 
       <section class="bg-white mb-4 p-4 rounded" x-cloak>
@@ -31,11 +31,11 @@
 
         <table class="w-full border-collapse border border-neutral-800" x-show="sessions.length > 0">
           <thead>
-            <th class="p-2 border border-neutral-800 bg-neutral-200">Session</th>
-            <th class="p-2 border border-neutral-800 bg-neutral-200">Match Total</th>
-            <th class="p-2 border border-neutral-800 bg-neutral-200">Match Average</th>
-            <th class="p-2 border border-neutral-800 bg-neutral-200">Big Axe Total</th>
-            <th class="p-2 border border-neutral-800 bg-neutral-200">Match Scores</th>
+            <th class="p-2 border border-neutral-800 bg-green-600">Session</th>
+            <th class="p-2 border border-neutral-800 bg-green-600">Match Total</th>
+            <th class="p-2 border border-neutral-800 bg-green-600">Match Average</th>
+            <th class="p-2 border border-neutral-800 bg-green-600">Big Axe Total</th>
+            <th class="p-2 border border-neutral-800 bg-green-600">Match Scores</th>
           </thead>
           <tbody>
             <template x-for="x in sessions" :key="x.timestamp">
