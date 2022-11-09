@@ -27,34 +27,32 @@
       </section>
 
       <section class="bg-white mb-4 p-4 rounded" x-cloak>
-        <h1 x-text="sessions.length"></h1>
-
         <p x-show="sessions.length === 0">No practice sessions have been submitted yet.</p>
 
-        <table x-show="sessions.length > 0">
+        <table class="border-collapse border border-neutral-800" x-show="sessions.length > 0">
           <thead>
-            <th>Session</th>
-            <th>Total Match Score</th>
-            <th>Average Match Score</th>
-            <th>Big Axe Total Score</th>
-            <th>Match 1 Score</th>
-            <th>Match 2 Score</th>
-            <th>Match 3 Score</th>
-            <th>Match 4 Score</th>
-            <th>Match 5 Score</th>
+            <th class="border border-neutral-800">Session</th>
+            <th class="border border-neutral-800">Total Match Score</th>
+            <th class="border border-neutral-800">Average Match Score</th>
+            <th class="border border-neutral-800">Big Axe Total Score</th>
+            <th class="border border-neutral-800">Match 1 Score</th>
+            <th class="border border-neutral-800">Match 2 Score</th>
+            <th class="border border-neutral-800">Match 3 Score</th>
+            <th class="border border-neutral-800">Match 4 Score</th>
+            <th class="border border-neutral-800">Match 5 Score</th>
           </thead>
           <tbody>
             <template x-for="x in sessions" :key="x.timestamp">
               <tr>
-                <td x-text="x.timestamp"></td>
-                <td x-text="x.totalMatchScore"></td>
-                <td x-text="x.averageMatchScore"></td>
-                <td x-text="x.bigAxe.total"></td>
-                <td x-text="x.match1.total"></td>
-                <td x-text="x.match2.total"></td>
-                <td x-text="x.match3.total"></td>
-                <td x-text="x.match4.total"></td>
-                <td x-text="x.match5.total"></td>
+                <td class="border border-neutral-800" x-text="x.timestamp"></td>
+                <td class="border border-neutral-800" x-text="x.totalMatchScore"></td>
+                <td class="border border-neutral-800" x-text="x.averageMatchScore"></td>
+                <td class="border border-neutral-800" x-text="x.bigAxe.total"></td>
+                <td class="border border-neutral-800" x-text="x.match1.total"></td>
+                <td class="border border-neutral-800" x-text="x.match2.total"></td>
+                <td class="border border-neutral-800" x-text="x.match3.total"></td>
+                <td class="border border-neutral-800" x-text="x.match4.total"></td>
+                <td class="border border-neutral-800" x-text="x.match5.total"></td>
               </tr>
             </template>
           </tbody>
