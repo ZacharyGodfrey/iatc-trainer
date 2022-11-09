@@ -37,7 +37,7 @@
             <th class="p-2 border border-neutral-700 font-normal bg-green-500">Total Score</th>
             <th class="p-2 border border-neutral-700 font-normal bg-green-500">Average Score</th>
             <th class="p-2 border border-neutral-700 font-normal bg-green-500">Big Axe Total</th>
-            <th class="p-2 border border-neutral-700 font-normal bg-green-500">Match Scores</th>
+            <th class="p-2 border border-neutral-700 font-normal bg-green-500">Details</th>
           </thead>
           <tbody>
             <template x-for="x in sessions" :key="x.id">
@@ -47,7 +47,7 @@
                 <td class="p-2 border border-neutral-800 text-center" x-text="x.averageMatchScore"></td>
                 <td class="p-2 border border-neutral-800 text-center" x-text="x.bigAxe.total"></td>
                 <td class="p-2 border border-neutral-800 text-center">
-                  <button class="px-4 py-2 rounded bg-green-500">Details</button>
+                  <button class="px-4 py-2 rounded bg-green-500">View</button>
                 </td>
               </tr>
             </template>
