@@ -91,7 +91,7 @@
             <tbody x-data="{ matches: [details.match1, details.match2, details.match3, details.match4, details.match5, details.bigAxe] }">
               <template x-for="m in matches" :key="m.name">
                 <tr x-data="{ throws: [m.throw1, m.throw2, m.throw3, m.throw4, m.throw5, m.throw6, m.throw7, m.throw8, m.throw9, m.throw10, m.throw11, m.throw12, m.throw13, m.throw14, m.throw15] }">
-                  <td class="p-2 border border-neutral-700 text-center" x-text="x.name"></td>
+                  <td class="p-2 border border-neutral-700 text-center" x-text="m.name"></td>
                   <template x-for="(t, i) in throws" :key="i">
                     <td :class="{
                       'p-2 border border-neutral-700 text-center': true,
@@ -102,7 +102,7 @@
                       'bg-red-400': t === 0,
                     }" x-text="t"></td>
                   </template>
-                  <td class="p-2 border border-neutral-700 text-center" x-text="x.total"></td>
+                  <td class="p-2 border border-neutral-700 text-center" x-text="m.total"></td>
                 </tr>
               </template>
             </tbody>
