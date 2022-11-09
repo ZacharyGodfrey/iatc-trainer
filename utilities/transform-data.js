@@ -46,10 +46,19 @@ const denormalizeSheetData = (sheetData) => {
   }, {});
 };
 
+const byDescending = (items, selector) => {
+  return items.sort((left, right) => {
+    const l = selector(left), r = selector(right);
+
+    return r < l ? -1 : r > l ? 1 : 0;
+  });
+};
+
 module.exports = (sheetDataObjects) => {
-  return sheetDataObjects.map((sheetData) => {
+  const mapped = sheetDataObjects.map((sheetData) => {
     const denormalized = denormalizeSheetData(sheetData);
     const result = {
+      id: dayjs(denormalized.timestamp, 'M/D/YYYY HH:mm:ss').toISOString(),
       timestamp: dayjs(denormalized.timestamp, 'M/D/YYYY HH:mm:ss').format('YYYY MMM DD hh:mma'),
       totalMatchScore: 0,
       averageMatchScore: 0,
@@ -91,4 +100,6 @@ module.exports = (sheetDataObjects) => {
 
     return result;
   });
+
+  return byDescending(mapped, ({ id }) => id);
 };
