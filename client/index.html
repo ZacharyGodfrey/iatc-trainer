@@ -42,14 +42,14 @@
             </tr>
           </thead>
           <tbody>
-            <template x-for="(x, i) in sessions" :key="x.id">
+            <template x-for="s in sessions" :key="s.id">
               <tr>
-                <td class="p-2 border border-neutral-700 text-center" x-text="x.timestamp"></td>
-                <td class="p-2 border border-neutral-700 text-center" x-text="x.totalMatchScore"></td>
-                <td class="p-2 border border-neutral-700 text-center" x-text="x.averageMatchScore"></td>
-                <td class="p-2 border border-neutral-700 text-center" x-text="x.bigAxe.total"></td>
+                <td class="p-2 border border-neutral-700 text-center" x-text="s.timestamp"></td>
+                <td class="p-2 border border-neutral-700 text-center" x-text="s.totalMatchScore"></td>
+                <td class="p-2 border border-neutral-700 text-center" x-text="s.averageMatchScore"></td>
+                <td class="p-2 border border-neutral-700 text-center" x-text="s.bigAxe.total"></td>
                 <td class="p-2 border border-neutral-700 text-center">
-                  <button class="px-4 py-2 rounded bg-green-500" @click="details = sessions[i]">View</button>
+                  <button class="px-4 py-2 rounded bg-green-500" @click="details = s">View</button>
                 </td>
               </tr>
             </template>
@@ -88,11 +88,11 @@
                 <th class="p-2 border border-neutral-700 font-normal bg-green-500">Total</th>
               </tr>
             </thead>
-            <tbody x-data="{ matches: [details.match1, details.match2, details.match3, details.match4, details.match5, details.bigAxe] }">
+            <tbody>
               <template x-for="m in matches" :key="m.name">
-                <tr x-data="{ throws: [m.throw1, m.throw2, m.throw3, m.throw4, m.throw5, m.throw6, m.throw7, m.throw8, m.throw9, m.throw10, m.throw11, m.throw12, m.throw13, m.throw14, m.throw15] }">
+                <tr>
                   <td class="p-2 border border-neutral-700 text-center" x-text="m.name"></td>
-                  <template x-for="(t, i) in throws" :key="i">
+                  <template x-for="(t, i) in m.throws" :key="i">
                     <td :class="{
                       'p-2 border border-neutral-700 text-center': true,
                       'bg-lime-500': t === 7,
