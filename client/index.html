@@ -19,7 +19,7 @@
       </section>
     </header>
 
-    <main class="grow w-full max-w-4xl mx-auto p-4" x-data="{ sessions: [], sessionIndex: 0, showDetails: false }" x-init="sessions = await getSessions()">
+    <main class="grow w-full max-w-4xl mx-auto p-4" x-data="{ state: {} }" x-init="state = await buildState()">
       <section class="bg-white mb-4 p-4 rounded-lg">
         <p>Training sessions use the <a class="underline text-green-500" target="_blank" href="https://internationalaxethrowingfederation.com/round-1-of-the-iatc">IATC Round 1</a> competition format.</p>
       </section>
@@ -29,9 +29,9 @@
 
         <br>
 
-        <p x-cloak x-show="sessions.length === 0">No practice sessions have been submitted yet.</p>
+        <p x-cloak x-show="state.sessions.length === 0">No practice sessions have been submitted yet.</p>
 
-        <table class="w-full border-collapse border border-neutral-700" x-cloak x-show="sessions.length > 0">
+        <table class="w-full border-collapse border border-neutral-700" x-cloak x-show="state.sessions.length > 0">
           <thead>
             <tr>
               <th class="p-2 border border-neutral-700 font-normal bg-green-500">Session</th>
@@ -42,14 +42,14 @@
             </tr>
           </thead>
           <tbody>
-            <template x-for="(s, i) in sessions" :key="s.id">
+            <template x-for="(s, i) in state.sessions" :key="s.id">
               <tr>
                 <td class="p-2 border border-neutral-700 text-center" x-text="s.timestamp"></td>
                 <td class="p-2 border border-neutral-700 text-center" x-text="s.totalMatchScore"></td>
                 <td class="p-2 border border-neutral-700 text-center" x-text="s.averageMatchScore"></td>
                 <td class="p-2 border border-neutral-700 text-center" x-text="s.bigAxe.total"></td>
                 <td class="p-2 border border-neutral-700 text-center">
-                  <button class="px-4 py-2 rounded bg-green-500" @click="sessionIndex = i, showDetails = true">View</button>
+                  <button class="px-4 py-2 rounded bg-green-500" @click="state.show(i)">View</button>
                 </td>
               </tr>
             </template>
@@ -57,29 +57,29 @@
         </table>
       </section>
 
-      <section class="bg-white mb-4 p-4 rounded-lg" x-cloak x-show="showDetails">
-        <h2 class="text-2xl">Session Details: <span x-text="sessions[sessionIndex].timestamp"></span></h2>
+      <section class="bg-white mb-4 p-4 rounded-lg" x-cloak x-show="state.showDetails">
+        <h2 class="text-2xl">Session Details: <span x-text="state.details.timestamp"></span></h2>
 
         <br>
 
         <p>
           <strong>Total Score:</strong>
-          <span x-text="sessions[sessionIndex].totalMatchScore"></span>
+          <span x-text="state.details.totalMatchScore"></span>
         </p>
 
         <p>
           <strong>Average Score:</strong>
-          <span x-text="sessions[sessionIndex].averageMatchScore"></span>
+          <span x-text="state.details.averageMatchScore"></span>
         </p>
 
         <p>
           <strong>Big Axe Score:</strong>
-          <span x-text="sessions[sessionIndex].bigAxe.total"></span>
+          <span x-text="state.details.bigAxe.total"></span>
         </p>
 
         <br>
 
-        <table class="w-full border-collapse border border-neutral-700" x-data="sessions[sessionIndex]">
+        <table class="w-full border-collapse border border-neutral-700" x-data="state.details">
           <thead>
             <tr>
               <th class="p-2 border border-neutral-700 font-normal bg-green-500">Match</th>
@@ -88,7 +88,7 @@
             </tr>
           </thead>
           <tbody>
-            <template x-for="m in sessions[sessionIndex].matches" :key="m.name">
+            <template x-for="m in state.details.matches" :key="m.name">
               <tr>
                 <td class="p-2 border border-neutral-700 text-center" x-text="m.name"></td>
                 <template x-for="(t, i) in m.throws" :key="i">
@@ -110,7 +110,7 @@
         <br>
 
         <div class="text-right">
-          <button class="px-4 py-2 rounded bg-green-500" @click="showDetails = false">Close</button>
+          <button class="px-4 py-2 rounded bg-green-500" @click="state.hide()">Close</button>
         </div>
       </section>
 
@@ -140,6 +140,27 @@
         console.log(sessions);
 
         return sessions;
+      };
+
+      const buildState = async () => {
+        const sessions = await getSessions();
+        let sessionIndex = -1;
+
+        return {
+          sessions,
+          get details() {
+            return sessions[sessionIndex];
+          },
+          get showDetails() {
+            return sessionIndex >= 0;
+          },
+          show: (index) => {
+            sessionIndex = index;
+          },
+          hide: () => {
+            sessionIndex = -1;
+          }
+        }
       };
     </script>
   </body>
