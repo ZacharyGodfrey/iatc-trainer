@@ -19,19 +19,19 @@
       </section>
     </header>
 
-    <main class="grow w-full max-w-4xl mx-auto p-4" x-data="{ sessions: [], sessionIndex: -1 }" x-init="sessions = await getSessions()">
+    <main class="grow w-full max-w-4xl mx-auto p-4" x-data="{ sessions: [], sessionIndex: 0, showDetails: false }" x-init="sessions = await getSessions()">
       <section class="bg-white mb-4 p-4 rounded-lg">
         <p>Training sessions use the <a class="underline text-green-500" target="_blank" href="https://internationalaxethrowingfederation.com/round-1-of-the-iatc">IATC Round 1</a> competition format.</p>
       </section>
 
-      <section class="bg-white mb-4 p-4 rounded-lg" x-cloak>
+      <section class="bg-white mb-4 p-4 rounded-lg">
         <h2 class="text-2xl">Sessions</h2>
 
         <br>
 
-        <p x-show="sessions.length === 0">No practice sessions have been submitted yet.</p>
+        <p x-cloak x-show="sessions.length === 0">No practice sessions have been submitted yet.</p>
 
-        <table class="w-full border-collapse border border-neutral-700" x-show="sessions.length > 0">
+        <table class="w-full border-collapse border border-neutral-700" x-cloak x-show="sessions.length > 0">
           <thead>
             <tr>
               <th class="p-2 border border-neutral-700 font-normal bg-green-500">Session</th>
@@ -49,7 +49,7 @@
                 <td class="p-2 border border-neutral-700 text-center" x-text="s.averageMatchScore"></td>
                 <td class="p-2 border border-neutral-700 text-center" x-text="s.bigAxe.total"></td>
                 <td class="p-2 border border-neutral-700 text-center">
-                  <button class="px-4 py-2 rounded bg-green-500" @click="sessionIndex = i">View</button>
+                  <button class="px-4 py-2 rounded bg-green-500" @click="sessionIndex = i, showDetails = true">View</button>
                 </td>
               </tr>
             </template>
@@ -57,65 +57,63 @@
         </table>
       </section>
 
-      <template x-if="sessionIndex >= 0">
-        <section class="bg-white mb-4 p-4 rounded-lg" x-data="{ details: {} }" x-init="details = sessions[sessionIndex]">
-          <h2 class="text-2xl">Session Details: <span x-text="details.timestamp"></span></h2>
+      <section class="bg-white mb-4 p-4 rounded-lg" x-cloak x-show="showDetails">
+        <h2 class="text-2xl">Session Details: <span x-text="sessions[sessionIndex].timestamp"></span></h2>
 
-          <br>
+        <br>
 
-          <p>
-            <strong>Total Score:</strong>
-            <span x-text="details.totalMatchScore"></span>
-          </p>
+        <p>
+          <strong>Total Score:</strong>
+          <span x-text="sessions[sessionIndex].totalMatchScore"></span>
+        </p>
 
-          <p>
-            <strong>Average Score:</strong>
-            <span x-text="details.averageMatchScore"></span>
-          </p>
+        <p>
+          <strong>Average Score:</strong>
+          <span x-text="sessions[sessionIndex].averageMatchScore"></span>
+        </p>
 
-          <p>
-            <strong>Big Axe Score:</strong>
-            <span x-text="details.bigAxe.total"></span>
-          </p>
+        <p>
+          <strong>Big Axe Score:</strong>
+          <span x-text="sessions[sessionIndex].bigAxe.total"></span>
+        </p>
 
-          <br>
+        <br>
 
-          <table class="w-full border-collapse border border-neutral-700" x-data="details">
-            <thead>
+        <table class="w-full border-collapse border border-neutral-700" x-data="sessions[sessionIndex]">
+          <thead>
+            <tr>
+              <th class="p-2 border border-neutral-700 font-normal bg-green-500">Match</th>
+              <th class="p-2 border border-neutral-700 font-normal bg-green-500" colspan="15">Throws</th>
+              <th class="p-2 border border-neutral-700 font-normal bg-green-500">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template x-for="m in sessions[sessionIndex].matches" :key="m.name">
               <tr>
-                <th class="p-2 border border-neutral-700 font-normal bg-green-500">Match</th>
-                <th class="p-2 border border-neutral-700 font-normal bg-green-500" colspan="15">Throws</th>
-                <th class="p-2 border border-neutral-700 font-normal bg-green-500">Total</th>
+                <td class="p-2 border border-neutral-700 text-center" x-text="m.name"></td>
+                <template x-for="(t, i) in m.throws" :key="i">
+                  <td :class="{
+                    'p-2 border border-neutral-700 text-center': true,
+                    'bg-lime-500': t === 7,
+                    'bg-lime-300': t === 5,
+                    'bg-yellow-200': t === 3,
+                    'bg-red-300': t === 1,
+                    'bg-red-400': t === 0,
+                  }" x-text="t"></td>
+                </template>
+                <td class="p-2 border border-neutral-700 text-center" x-text="m.total"></td>
               </tr>
-            </thead>
-            <tbody>
-              <template x-for="m in matches" :key="m.name">
-                <tr>
-                  <td class="p-2 border border-neutral-700 text-center" x-text="m.name"></td>
-                  <template x-for="(t, i) in m.throws" :key="i">
-                    <td :class="{
-                      'p-2 border border-neutral-700 text-center': true,
-                      'bg-lime-500': t === 7,
-                      'bg-lime-300': t === 5,
-                      'bg-yellow-200': t === 3,
-                      'bg-red-300': t === 1,
-                      'bg-red-400': t === 0,
-                    }" x-text="t"></td>
-                  </template>
-                  <td class="p-2 border border-neutral-700 text-center" x-text="m.total"></td>
-                </tr>
-              </template>
-            </tbody>
-          </table>
-          
-          <br>
-          
-          <div class="text-right">
-            <button class="px-4 py-2 rounded bg-green-500" @click="sessionIndex = -1">Close</button>
-          </div>
-        </section>
-      </template>
-      
+            </template>
+          </tbody>
+        </table>
+
+        <br>
+
+        <div class="text-right">
+          <button class="px-4 py-2 rounded bg-green-500" @click="showDetails = false">Close</button>
+        </div>
+      </section>
+
       <section class="bg-white mb-4 p-4 rounded-lg">
         <p>Compare against IATC 2022 scores with <a class="underline text-green-500" target="_blank" href="http://internationalaxethrowingfederation.com/wp-content/uploads/2022/04/IATC-2022-Round-1-Results-April-20-2022.pdf">this PDF</a>.</p>
       </section>
