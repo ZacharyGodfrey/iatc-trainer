@@ -54,38 +54,33 @@ const byDescending = (items, selector) => {
   });
 };
 
+const transformMatch = (name, denormalizedMatch) => {
+  const throws = Object.values(denormalizedMatch);
+  
+  return {
+    name,
+    throws,
+    total: sum(throws),
+    ...denormalizedMatch
+  };
+};
+
 module.exports = (sheetDataObjects) => {
   const mapped = sheetDataObjects.map((sheetData) => {
     const denormalized = denormalizeSheetData(sheetData);
+    const date = dayjs(denormalized.timestamp, 'M/D/YYYY HH:mm:ss');
     const result = {
-      id: dayjs(denormalized.timestamp, 'M/D/YYYY HH:mm:ss').toISOString(),
-      timestamp: dayjs(denormalized.timestamp, 'M/D/YYYY HH:mm:ss').format('YYYY MMM DD hh:mma'),
+      id: date.toISOString(),
+      timestamp: date.format('YYYY MMM DD hh:mma'),
       totalMatchScore: 0,
       averageMatchScore: 0,
-      match1: {
-        total: sum(Object.values(denormalized.match1)),
-        ...denormalized.match1
-      },
-      match2: {
-        total: sum(Object.values(denormalized.match2)),
-        ...denormalized.match2
-      },
-      match3: {
-        total: sum(Object.values(denormalized.match3)),
-        ...denormalized.match3
-      },
-      match4: {
-        total: sum(Object.values(denormalized.match4)),
-        ...denormalized.match4
-      },
-      match5: {
-        total: sum(Object.values(denormalized.match5)),
-        ...denormalized.match5
-      },
-      bigAxe: {
-        total: sum(Object.values(denormalized.bigAxe)),
-        ...denormalized.bigAxe
-      },
+      matches: [],
+      match1: transformMatch('Match 1', denormalized.match1),
+      match2: transformMatch('Match 2', denormalized.match2),
+      match3: transformMatch('Match 3', denormalized.match3),
+      match4: transformMatch('Match 4', denormalized.match4),
+      match5: transformMatch('Match 5', denormalized.match5),
+      bigAxe: transformMatch('Big Axe', denormalized.bigAxe),
     };
 
     result.totalMatchScore = sum([
@@ -97,6 +92,15 @@ module.exports = (sheetDataObjects) => {
     ]);
 
     result.averageMatchScore = roundToPlaces(result.totalMatchScore / 5, 3);
+    
+    result.matches = [
+      result.match1,
+      result.match2,
+      result.match3,
+      result.match4,
+      result.match5,
+      result.bigAxe,
+    ];
 
     return result;
   });
