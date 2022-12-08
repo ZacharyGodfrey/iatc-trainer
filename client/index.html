@@ -29,9 +29,14 @@
 
         <br>
 
-        <p x-cloak x-show="!loading && sessions.length === 0">No practice sessions have been submitted yet.</p>
+        <p>
+          <span x-text="loading"></span>
+          <span x-text="sessions.length"></span>
+        </p>
 
-        <table class="w-full border-collapse border border-neutral-700" x-cloak x-show="!loading && sessions.length > 0">
+        <p x-show="!loading && sessions.length === 0">No practice sessions have been submitted yet.</p>
+
+        <table class="w-full border-collapse border border-neutral-700" x-show="!loading && sessions.length > 0">
           <thead>
             <tr>
               <th class="p-2 border border-neutral-700 font-normal bg-green-500">Session</th>
