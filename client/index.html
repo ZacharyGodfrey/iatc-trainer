@@ -29,11 +29,6 @@
 
         <br>
 
-        <p>
-          <span x-text="loading"></span>
-          <span x-text="sessions.length"></span>
-        </p>
-
         <p x-show="loading">Retrieving practice sessions...</p>
 
         <p x-show="!loading && sessions.length === 0">No practice sessions have been submitted yet.</p>
