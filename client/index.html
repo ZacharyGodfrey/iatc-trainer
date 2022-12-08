@@ -132,7 +132,13 @@
         }
       };
 
-      const getSessions = () => fetch('/api').then(res => res.json());
+      const getSessions = () => {
+        const sessions = fetch('/api').then(res => res.json());
+
+        console.log(sessions);
+
+        return sessions;
+      };
     </script>
   </body>
 </html>
