@@ -22,6 +22,11 @@
         --light: #FFFFFF;
         --medium: #EEEEEE;
         --dark: #303030;
+        --zero: #D74B4B;
+        --one: #D7734B;
+        --three: #D7D74B;
+        --five: #A0D74B;
+        --seven: #4BD750;
         font-size: 16px;
         font-family: monospace;
       }
@@ -187,6 +192,12 @@
       .no-wrap {
         white-space: nowrap;
       }
+
+      .zero { background: var(--zero); }
+      .one { background: var(--one); }
+      .three { background: var(--three); }
+      .five { background: var(--five); }
+      .seven { background: var(--seven); }
     </style>
     <script src="https://unpkg.com/alpinejs" defer></script>
   </head>
@@ -245,7 +256,13 @@
               <template x-for="m in [s.match2, s.match3, s.match4, s.match5]" :key="m.name">
                 <tr>
                   <template x-for="(t, i) in m.throws" :key="i">
-                    <td x-text="t"></td>
+                    <td x-text="t" :class="{
+                      zero: t === 0,
+                      one: t === 1,
+                      three: t === 3,
+                      five: t === 5,
+                      seven: t === 7
+                    }"></td>
                   </template>
 
                   <td x-text="m.total"></td>
