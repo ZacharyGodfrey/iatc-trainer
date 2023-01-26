@@ -244,7 +244,7 @@
                   }"></td>
                 </template>
                 <td x-text="s.match1.total"></td>
-                <td rowspan="5" x-text="s.averageMatchScore"></td>
+                <td rowspan="5" x-text="s.averageMatchScore.toFixed(1)"></td>
               </tr>
 
               <template x-for="m in [s.match2, s.match3, s.match4, s.match5]" :key="m.name">
