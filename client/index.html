@@ -209,8 +209,8 @@
               <th>Average</th>
             </tr>
           </thead>
-          <tbody>
-            <template x-for="s in sessions" :key="s.id">
+          <template x-for="s in sessions" :key="s.id">
+            <tbody>
               <tr>
                 <td rowspan="6" x-text="s.timestamp"></td>
                 <td rowspan="5">Hatchet</td>
@@ -225,8 +225,8 @@
                 <td x-text="s.bigAxe.total"></td>
                 <td>N/A</td>
               </tr>
-            </template>
-          </tbody>
+            </tbody>
+          </template>
         </table>
       </section>
     </main>
