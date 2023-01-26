@@ -163,7 +163,6 @@
 
       table {
         width: 100%;
-        overflow-x: auto;
         border-collapse: collapse;
       }
 
@@ -171,7 +170,6 @@
       td {
         padding: 0.5rem;
         text-align: center;
-        white-space: nowrap;
       }
 
       .text-center {
@@ -180,6 +178,10 @@
 
       .text-right {
         text-align: right;
+      }
+
+      .no-wrap {
+        white-space: nowrap;
       }
     </style>
     <script src="https://unpkg.com/alpinejs" defer></script>
@@ -212,7 +214,10 @@
           <template x-for="s in sessions" :key="s.id">
             <tbody>
               <tr>
-                <td rowspan="6" x-text="s.timestamp"></td>
+                <td rowspan="6">
+                  <span class="no-wrap" x-text="s.date"></span>
+                  <span class="no-wrap" x-text="s.time"></span>
+                </td>
                 <td rowspan="5">Hatchet</td>
                 <td x-text="s.match1.throw1"></td>
                 <td x-text="s.match1.throw2"></td>
