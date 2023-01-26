@@ -234,21 +234,15 @@
                   <span class="no-wrap" x-text="s.time"></span>
                 </th>
                 <td rowspan="5">Hatchet</td>
-                <td x-text="s.match1.throw1"></td>
-                <td x-text="s.match1.throw2"></td>
-                <td x-text="s.match1.throw3"></td>
-                <td x-text="s.match1.throw4"></td>
-                <td x-text="s.match1.throw5"></td>
-                <td x-text="s.match1.throw6"></td>
-                <td x-text="s.match1.throw7"></td>
-                <td x-text="s.match1.throw8"></td>
-                <td x-text="s.match1.throw9"></td>
-                <td x-text="s.match1.throw10"></td>
-                <td x-text="s.match1.throw11"></td>
-                <td x-text="s.match1.throw12"></td>
-                <td x-text="s.match1.throw13"></td>
-                <td x-text="s.match1.throw14"></td>
-                <td x-text="s.match1.throw15"></td>
+                <template x-for="(t, i) in s.match1.throws" :key="i">
+                  <td x-text="t" :class="{
+                    zero: t === 0,
+                    one: t === 1,
+                    three: t === 3,
+                    five: t === 5,
+                    seven: t === 7
+                  }"></td>
+                </template>
                 <td x-text="s.match1.total"></td>
                 <td rowspan="5" x-text="s.averageMatchScore"></td>
               </tr>
@@ -264,28 +258,21 @@
                       seven: t === 7
                     }"></td>
                   </template>
-
                   <td x-text="m.total"></td>
                 </tr>
               </template>
 
               <tr>
                 <td>Big Axe</td>
-                <td x-text="s.bigAxe.throw1"></td>
-                <td x-text="s.bigAxe.throw2"></td>
-                <td x-text="s.bigAxe.throw3"></td>
-                <td x-text="s.bigAxe.throw4"></td>
-                <td x-text="s.bigAxe.throw5"></td>
-                <td x-text="s.bigAxe.throw6"></td>
-                <td x-text="s.bigAxe.throw7"></td>
-                <td x-text="s.bigAxe.throw8"></td>
-                <td x-text="s.bigAxe.throw9"></td>
-                <td x-text="s.bigAxe.throw10"></td>
-                <td x-text="s.bigAxe.throw11"></td>
-                <td x-text="s.bigAxe.throw12"></td>
-                <td x-text="s.bigAxe.throw13"></td>
-                <td x-text="s.bigAxe.throw14"></td>
-                <td x-text="s.bigAxe.throw15"></td>
+                <template x-for="(t, i) in s.bigAxe.throws" :key="i">
+                  <td x-text="t" :class="{
+                    zero: t === 0,
+                    one: t === 1,
+                    three: t === 3,
+                    five: t === 5,
+                    seven: t === 7
+                  }"></td>
+                </template>
                 <td x-text="s.bigAxe.total"></td>
                 <td>N/A</td>
               </tr>
