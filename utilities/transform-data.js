@@ -56,7 +56,7 @@ const byDescending = (items, selector) => {
 
 const transformMatch = (name, denormalizedMatch) => {
   const throws = Object.values(denormalizedMatch);
-  
+
   return {
     name,
     throws,
@@ -71,7 +71,8 @@ module.exports = (sheetDataObjects) => {
     const date = dayjs(denormalized.timestamp, 'M/D/YYYY HH:mm:ss');
     const result = {
       id: date.toISOString(),
-      timestamp: date.format('YYYY MMM DD hh:mma'),
+      date: date.format('YYYY MMM DD'),
+      time: date.format('hh:mma'),
       totalMatchScore: 0,
       averageMatchScore: 0,
       matches: [],
@@ -92,7 +93,7 @@ module.exports = (sheetDataObjects) => {
     ]);
 
     result.averageMatchScore = roundToPlaces(result.totalMatchScore / 5, 3);
-    
+
     result.matches = [
       result.match1,
       result.match2,
