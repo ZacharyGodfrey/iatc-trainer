@@ -28,7 +28,7 @@
         --three: #D7D74B;
         --five: #A0D74B;
         --seven: #4BD750;
-        --max-content-width: 100ch;
+        --max-content-width: 80ch;
         font-size: 18px;
         font-family: ui-monospace, Consolas, monospace;
       }
@@ -199,40 +199,26 @@
 
         <p x-cloak x-show="sessions.length === 0" x-text="getStatusText(loading)" x-bind:aria-busy="loading"></p>
 
-        <table x-cloak x-show="!loading && sessions.length > 0">
-          <thead>
-            <tr>
-              <th>Session</th>
-              <th>Tool</th>
-              <th colspan="15">Throws</th>
-              <th>Total</th>
-              <th>Average</th>
-            </tr>
-          </thead>
-          <template x-for="s in sessions" :key="s.id">
-            <tbody>
+        <figure>
+          <table x-cloak x-show="!loading && sessions.length > 0">
+            <thead>
               <tr>
-                <th rowspan="6">
-                  <p class="no-wrap" x-text="s.date"></p>
-                  <p class="no-wrap" x-text="s.time"></p>
-                </th>
-                <td rowspan="5">Hatchet</td>
-                <template x-for="(t, i) in s.match1.throws" :key="i">
-                  <td x-text="t" :class="{
-                    zero: t === 0,
-                    one: t === 1,
-                    three: t === 3,
-                    five: t === 5,
-                    seven: t === 7
-                  }"></td>
-                </template>
-                <td x-text="s.match1.total"></td>
-                <td rowspan="5" x-text="s.averageMatchScore.toFixed(1)"></td>
+                <th>Session</th>
+                <th>Tool</th>
+                <th colspan="15">Throws</th>
+                <th>Total</th>
+                <th>Average</th>
               </tr>
-
-              <template x-for="m in [s.match2, s.match3, s.match4, s.match5]" :key="m.name">
+            </thead>
+            <template x-for="s in sessions" :key="s.id">
+              <tbody>
                 <tr>
-                  <template x-for="(t, i) in m.throws" :key="i">
+                  <th rowspan="6">
+                    <p class="no-wrap" x-text="s.date"></p>
+                    <p class="no-wrap" x-text="s.time"></p>
+                  </th>
+                  <td rowspan="5">Hatchet</td>
+                  <template x-for="(t, i) in s.match1.throws" :key="i">
                     <td x-text="t" :class="{
                       zero: t === 0,
                       one: t === 1,
@@ -241,27 +227,43 @@
                       seven: t === 7
                     }"></td>
                   </template>
-                  <td x-text="m.total"></td>
+                  <td x-text="s.match1.total"></td>
+                  <td rowspan="5" x-text="s.averageMatchScore.toFixed(1)"></td>
                 </tr>
-              </template>
 
-              <tr>
-                <td>Big Axe</td>
-                <template x-for="(t, i) in s.bigAxe.throws" :key="i">
-                  <td x-text="t" :class="{
-                    zero: t === 0,
-                    one: t === 1,
-                    three: t === 3,
-                    five: t === 5,
-                    seven: t === 7
-                  }"></td>
+                <template x-for="m in [s.match2, s.match3, s.match4, s.match5]" :key="m.name">
+                  <tr>
+                    <template x-for="(t, i) in m.throws" :key="i">
+                      <td x-text="t" :class="{
+                        zero: t === 0,
+                        one: t === 1,
+                        three: t === 3,
+                        five: t === 5,
+                        seven: t === 7
+                      }"></td>
+                    </template>
+                    <td x-text="m.total"></td>
+                  </tr>
                 </template>
-                <td x-text="s.bigAxe.total"></td>
-                <td>N/A</td>
-              </tr>
-            </tbody>
-          </template>
-        </table>
+
+                <tr>
+                  <td>Big Axe</td>
+                  <template x-for="(t, i) in s.bigAxe.throws" :key="i">
+                    <td x-text="t" :class="{
+                      zero: t === 0,
+                      one: t === 1,
+                      three: t === 3,
+                      five: t === 5,
+                      seven: t === 7
+                    }"></td>
+                  </template>
+                  <td x-text="s.bigAxe.total"></td>
+                  <td>N/A</td>
+                </tr>
+              </tbody>
+            </template>
+          </table>
+        </figure>
       </section>
     </main>
 
